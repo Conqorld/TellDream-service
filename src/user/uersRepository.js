@@ -9,7 +9,7 @@ class userRepository {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         account TEXT UNIQUE NOT NULL,
         passWord TEXT NOT NULL,
-        token TEXT UNIQUE NOT NULL,
+        token TEXT,
         createTime INTEGER NOT NULL,
         updateTime INTEGER NOT NULL)`
     return sql
@@ -19,7 +19,7 @@ class userRepository {
     return this.dao.run(
       `INSERT INTO user (account, passWord, createTime, updateTime)
         VALUES (?, ?, ?, ?)`,
-      [account, passWord, createTime, updateTime])
+      [account, passWord, createTime, updateTime,])
   }
   
   updatePassWord(user) {

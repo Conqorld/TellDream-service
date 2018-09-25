@@ -132,7 +132,6 @@ app.all('/tellDream/register', function (req, res) {
           return userRepo.getByUserAccount(req.body.account)
         })
         .then(result => {
-          console.log(result.id)
           res.send({token: encrypt.encryptedAES(result.id.toString())});
           res.end( );
           dao.close()
