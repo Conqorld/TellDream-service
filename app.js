@@ -1,5 +1,5 @@
 var express = require('express')
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 4567
 var app = express()
 // import databaseMain from './databaseMain'
 const databaseMain = require('./src/databaseMain')
