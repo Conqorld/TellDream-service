@@ -196,6 +196,11 @@ app.all('/tellDream/createStory', function (req, res) {
             res.end( );
             dao.close()
         })
+        .catch(err => {
+          res.status(401).send({err: err.code})
+          res.end( );
+          dao.close()
+        })
 })
 app.all('/tellDream/upDateStory', function (req, res) {
     const dao = new AppDAO('./database.sqlite3')
