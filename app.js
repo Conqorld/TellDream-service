@@ -69,17 +69,18 @@ app.all('/tellDream/deleteStory', function (req, res) {
         })
 })
 app.all('/tellDream/getStoryDetail', function (req, res) {
+    let id = getTokenId(req, res)
+    if (!id) {
+      return false
+    }
     const dao = new AppDAO('./database.sqlite3')
     const storyRepo = new storyRepository(dao)
     storyRepo.getById(req.body.id)
         .then((rows) =>{
             rows.tag = rows.tag?JSON.parse(rows.tag):null
             rows.event = rows.event?JSON.parse(rows.event):null
-            let parms = {
-              status : 1,
-              result: rows
-            }
-            res.send(parms);
+            rows.isUser = rows.userId === id
+            res.send(rows);
             res.end( );
             dao.close()
         })
